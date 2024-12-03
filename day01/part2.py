@@ -11,7 +11,6 @@ def solve(input):
     """
     left, right = zip(*[map(int, line.split()) for line in input])
     right_counter = Counter(right)
-
     return sum(lnum * right_counter[lnum] for lnum in left)
 
 
