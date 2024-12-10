@@ -12,7 +12,7 @@ def solve(input):
     2000
     """
     matrix = {
-        x + y * 1j: cell for x, row in enumerate(input) for y, cell in enumerate(row)
+        x + y * 1j: cell for y, row in enumerate(input) for x, cell in enumerate(row)
     }
 
     return sum(
