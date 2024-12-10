@@ -27,7 +27,7 @@ def solve(input):
             continue
 
         free_block_idx = next(free_blocks, None)
-        if free_block_idx is not None and free_block_idx >= block_idx:
+        if free_block_idx is None or free_block_idx >= block_idx:
             break
 
         disk[free_block_idx] = disk[block_idx]
