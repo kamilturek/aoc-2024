@@ -8,15 +8,10 @@ SECONDS = 100
 
 
 def move(robots, seconds):
-    new_positions = set()
-
-    for px, py, vx, vy in robots:
-        px = (px + vx * seconds) % WIDTH
-        py = (py + vy * seconds) % HEIGHT
-
-        new_positions.add((px, py))
-
-    return new_positions
+    return {
+        ((px + vx * seconds) % WIDTH, (py + vy * seconds) % HEIGHT)
+        for px, py, vx, vy in robots
+    }
 
 
 def has_long_line(row):
@@ -28,14 +23,10 @@ def solve(input):
     >>> solve(open('input2.txt'))
     7687
     """
-    robots = set()
-
-    for robot in input:
-        px, py, vx, vy = map(
-            int, re.match(r"p=(\d+),(\d+) v=(-?\d+),(-?\d+)", robot).groups()
-        )
-
-        robots.add((px, py, vx, vy))
+    robots = {
+        tuple(map(int, re.match(r"p=(\d+),(\d+) v=(-?\d+),(-?\d+)", robot).groups()))
+        for robot in input
+    }
 
     for seconds in itertools.count():
         positions = move(robots, seconds)
